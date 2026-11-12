@@ -1,6 +1,8 @@
 # ---- build stage: install everything and build the frontend ----
 FROM node:22-bookworm-slim AS build
 WORKDIR /app
+ARG VITE_GOOGLE_MAPS_API_KEY
+ENV VITE_GOOGLE_MAPS_API_KEY=$VITE_GOOGLE_MAPS_API_KEY
 COPY package.json package-lock.json ./
 COPY client/package.json client/
 COPY server/package.json server/

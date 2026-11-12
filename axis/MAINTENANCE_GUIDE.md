@@ -70,6 +70,98 @@ docker compose up -d --force-recreate
 
 Check the service with `http://localhost:3001/api/health` when using port 3001.
 
+## 3. Hosting on a domain
+
+The simplest production setup is a Linux VPS with Docker and Caddy:
+
+```text
+your-domain.com
+       |
+DNS A/AAAA record
+       |
+VPS firewall: ports 80 and 443
+       |
+Caddy HTTPS reverse proxy
+       |
+AXIS Docker container on 127.0.0.1:3000
+```
+
+### Provider and server setup
+
+Use a VPS provider with Docker support, a persistent disk, backups, and at
+least 2 GB RAM for the initial deployment. On the server:
+
+1. Install Docker Engine and the Compose plugin.
+2. Clone the repository into a deployment directory.
+3. Copy `.env.example` to `.env`.
+4. Set production secrets and service settings.
+5. Keep the database and uploads on the persistent `axis-data` volume.
+6. Allow only SSH, HTTP, and HTTPS through the firewall.
+
+Example production `.env` values:
+
+```env
+NODE_ENV=production
+AXIS_HOST_PORT=3000
+AXIS_HOST_BIND=127.0.0.1
+TRUST_PROXY=1
+SEED_ON_START=false
+ADMIN_TOKEN=generate-a-long-random-value
+VITE_GOOGLE_MAPS_API_KEY=browser-restricted-key
+```
+
+`VITE_GOOGLE_MAPS_API_KEY` is a public browser key, not a server secret. Restrict
+it in Google Cloud to the Maps Embed API and the production domain. Compose
+passes it to the frontend build so the deployed map can load.
+
+Configure SMTP values in the same `.env`, but keep `SMTP_PASS` private. Do not
+commit `.env`.
+
+### DNS and HTTPS
+
+At the domain registrar, point the domain's A record to the VPS public IPv4
+address. Add an AAAA record only when IPv6 is correctly configured. Then use a
+reverse proxy such as Caddy:
+
+```text
+example.com {
+    reverse_proxy 127.0.0.1:3000
+}
+```
+
+Caddy obtains and renews HTTPS certificates automatically. Do not expose the
+Node container directly to the public internet when a reverse proxy is used.
+
+Start the application:
+
+```bash
+docker compose build
+docker compose up -d
+docker compose ps
+curl https://example.com/api/health
+```
+
+After code or frontend environment changes:
+
+```bash
+docker compose build --no-cache
+docker compose up -d --force-recreate
+```
+
+### Domain deployment checklist
+
+- [ ] Domain DNS points to the server.
+- [ ] Ports 80 and 443 are open; the application port is private.
+- [ ] HTTPS works and redirects HTTP correctly.
+- [ ] `TRUST_PROXY=1` is set only behind the trusted reverse proxy.
+- [ ] `ADMIN_TOKEN` is long, private, and not in Git.
+- [ ] SMTP credentials are configured with an App Password or provider secret.
+- [ ] Google Maps key is restricted to the production domain.
+- [ ] Database and uploads use persistent storage.
+- [ ] Backups run and have been copied off the VPS.
+- [ ] `/api/health`, `/`, `/about`, `/admin`, forms, images, and map work.
+- [ ] Docker logs and disk usage are monitored.
+
 ## 3. Updating content through the website
 
 Use `/admin` for normal content updates:
