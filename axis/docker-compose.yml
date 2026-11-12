@@ -1,0 +1,14 @@
+services:
+  web:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      NODE_ENV: production
+      DATABASE_PATH: /app/data/axis.db
+    ports:
+      - "${AXIS_HOST_PORT:-3000}:3000"
+    volumes:
+      - axis-data:/app/data   # database survives rebuilds and restarts
+volumes:
+  axis-data: {}

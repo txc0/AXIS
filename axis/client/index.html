@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AXIS | Living architecture, at every scale</title>
+<meta name="description" content="Handmade terrariums, green architecture and a growing community, from the AXIS studio in Dhaka.">
+<meta property="og:title" content="AXIS | Living architecture, at every scale">
+<meta property="og:description" content="Handmade terrariums, green architecture and a growing community, from Dhaka.">
+<meta property="og:image" content="/images/hero.jpg">
+<meta name="theme-color" content="#1a1a1a">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body>
+<a class="skip" href="#app">Skip to content</a>
+
+<header class="header">
+  <div class="utility"><a href="/about#visit">Visit the studio</a><a href="/about#contact">Contact</a></div>
+  <div class="bar">
+    <a href="/" class="logo" aria-label="AXIS home">AXIS</a>
+    <ul class="nav" id="nav">
+      <li class="has-mega"><a href="/#shop" data-cat="all">Terrariums</a>
+        <div class="mega">
+          <div><h4>Terrariums</h4><a href="/#shop" data-cat="ready">Ready terrariums</a><a href="/#shop" data-cat="plants">Terrarium plants</a><a href="/#shop" data-cat="custom">Custom terrariums</a><a href="/#build">Build your terrarium</a>
+            <h4>Plant library</h4><a href="/#shop" data-q="fern">Ferns</a><a href="/#shop" data-q="moss">Mosses</a><a href="/#shop" data-q="succulent">Succulents</a></div>
+          <div><h4>Architecture</h4><a href="/architecture#services">House plans</a><a href="/architecture#services">Green roofs</a><a href="/architecture#services">Living walls</a><a href="/architecture">Projects</a>
+            <h4>Discover</h4><a href="/#shop" data-cat="all">New</a><a href="/#shop" data-sort="low">Lowest prices</a></div>
+          <div><h4>Builder</h4><a href="/#build">Design your own</a><a href="#" data-consult>Book a consultation</a>
+            <h4>Service</h4><a href="/care">Care guides</a><a href="/care#clinic">Plant clinic</a><a href="/care#refill">Refill and repair</a></div>
+          <div><a class="promo" href="/#shop" data-cat="ready" style="background-image:url('/images/pr5.jpg')"><span>Cloud Forest, our bestseller</span></a><a class="promo" href="/#build" style="background-image:url('/images/cu.jpg')"><span>Build your own world</span></a></div>
+        </div>
+      </li>
+      <li><a href="/architecture">Architecture</a></li>
+      <li><a href="/#shop" data-cat="all">Shop</a></li>
+      <li><a href="/journal">Journal</a></li>
+      <li><a href="/community">Community</a></li>
+      <li><a href="/about">About AXIS</a></li>
+    </ul>
+    <button class="mb" id="mb" aria-label="Menu" aria-controls="nav" aria-expanded="false">MENU</button>
+    <div class="icons">
+      <button id="bSearch" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button>
+      <button data-orders aria-label="My orders"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></button>
+      <button id="bCart" aria-label="Cart"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.5 11h11L21 7H6.5"/><circle cx="9" cy="19.5" r="1.3"/><circle cx="17" cy="19.5" r="1.3"/></svg><b id="cn">0</b></button>
+    </div>
+  </div>
+</header>
+
+<main id="app" tabindex="-1" aria-live="polite"></main>
+
+<section class="news">
+  <div><h4>AXIS newsletter</h4><p>New worlds, limited editions and workshop invitations.</p></div>
+  <form id="nf" novalidate>
+    <input type="email" name="email" placeholder="Your email" aria-label="Email" autocomplete="email" required>
+    <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button class="btn">Subscribe</button>
+    <span id="nm" role="status"></span>
+  </form>
+</section>
+
+<footer>
+  <div class="fcols">
+    <div><h5>Shop</h5><a href="/#shop" data-cat="all">All products</a><a href="/#shop" data-cat="ready">Ready terrariums</a><a href="/#build">Custom builder</a></div>
+    <div><h5>Studio</h5><a href="/about">About AXIS</a><a href="/journal">Journal</a><a href="/community">Community</a></div>
+    <div><h5>Help</h5><a href="/about#contact">Contact us</a><a href="/care">Care guides</a><a href="#" data-orders>My orders</a></div>
+  </div>
+  <p class="copy">© <span id="yr"></span> AXIS STUDIO, DHAKA</p>
+  <button class="up" id="up">UP</button>
+</footer>
+
+<div id="md" role="dialog" aria-modal="true" aria-label="Dialog"></div>
+<aside id="dr" aria-label="Cart"></aside>
+<div id="ts" role="status" aria-live="polite"></div>
+<noscript><p style="padding:40px;text-align:center">AXIS needs JavaScript to run. Please enable it and reload.</p></noscript>
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>

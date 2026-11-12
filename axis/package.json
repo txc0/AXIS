@@ -1,0 +1,20 @@
+{
+  "name": "axis",
+  "private": true,
+  "type": "module",
+  "workspaces": ["client", "server"],
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "dev": "concurrently -n api,web -c blue,green \"npm run dev -w server\" \"npm run dev -w client\"",
+    "build": "npm run build -w client",
+    "start": "npm start -w server",
+    "seed": "npm run seed -w server",
+    "backup": "npm run backup -w server",
+    "test": "npm test -w server",
+    "images": "node scripts/extract-images.mjs",
+    "extract-images": "node scripts/extract-images.mjs"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
